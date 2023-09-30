@@ -1,0 +1,136 @@
+th.ant-table-cell {
+    background-color: #cce7f6 !important;
+    position: fixed;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f3f2f1;
+}
+
+
+tr.ant-table-cell {
+    border: 1px solid black;
+}
+
+.ant-spin {
+    display: flex;
+    justify-content: center;
+    height: 50vh;
+}
+
+.ant-tabs-tab {
+    border-radius: 0px !important;
+}
+
+.ant-table-cell {
+    font-size: 14px;
+}
+
+
+/* .ant-tabs.ant-tabs-top.ant-tabs-card.css-dev-only-do-not-override-diro6f {
+    display: grid !important;
+} */
+
+.ant-tabs-nav-list {
+    background-color: #cce7f6;
+    /* font-weight: 600; */
+}
+
+svg.svg-inline--fa {
+    margin-top: 3px !important;
+}
+
+header.ant-layout-header,
+footer.ant-layout-footer {
+    background-color: #cce7f6 !important;
+    box-sizing: border-box;
+    box-shadow: 0rem 0.1rem 1rem #cce7f6;
+}
+
+footer.ant-layout-footer {
+    padding: 8px 50px !important;
+}
+
+.menu-override {
+    /* display: flex !important; */
+    justify-content: flex-end !important;
+    background: #cce7f6 !important;
+    width: 300px;
+}
+
+.dashboard {
+    min-height: 400px;
+}
+
+.dashboard-text {
+    margin-left: 38%;
+}
+
+button.ant-btn.css-dev-only-do-not-override-diro6f.ant-btn-primary.ant-input-search-button,
+span.ant-input-clear-icon {
+    display: flex;
+    align-items: center;
+}
+
+img {
+    height: 32px;
+    /* float: left; */
+}
+
+.table-pie {
+    box-sizing: border-box;
+    box-shadow: 0rem 0.1rem 1rem #cce7f6;
+}
+
+.pie-chart .ant-card-body {
+    padding: 1px !important;
+}
+
+.ant-table-wrapper td.ant-table-column-sort {
+    background: none;
+}
+
+.ant-card-body {
+    box-shadow: 0rem 0.1rem 1rem #00000026;
+}
+
+.site-layout-content {
+    max-width: fit-content;
+}
+
+.ant-table-column-sorters {
+    cursor: text;
+}
+
+.ant-drawer-content-wrapper {
+    box-shadow: none !important;
+    top: 70px !important;
+}
+
+.ant-drawer-content {
+    height: calc(calc(var(--vh, 1vh) * 100) - 110px) !important;
+}
+
+.ant-drawer-header {
+    background: #cce7;
+}
+
+/* .ant-drawer-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+.text-center {
+    margin-right: 0vh;
+}
+
+@media (min-width:1000px) {
+    .text-center {
+        margin-right: 10vh;
+    }
+}
