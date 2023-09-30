@@ -5,9 +5,9 @@ import FileUpload from "../file-upload";
 import { useDispatch, useSelector } from "react-redux";
 import { getStackOptions } from "../../services/get-options/action";
 import { ResumeDetails } from "../resume-details";
+import { CustomCard } from "../custom-card";
 
 export const UploadFiles = React.memo(() => {
-  
   const formRef = React.useRef(null);
   const { stackOptionRes, vendorOptionRes } = useSelector(
     ({ getStackOptionReducer, getVendorOptionReducer }) => ({
@@ -63,6 +63,7 @@ export const UploadFiles = React.memo(() => {
 
   return (
     <div className="mt-5">
+      <CustomCard />
       <Form ref={formRef} onFinish={onSubmit} initialValues={getDetails}>
         <Row className="d-flex justify-content-between mt-5" gutter={16}>
           {contextHolder}

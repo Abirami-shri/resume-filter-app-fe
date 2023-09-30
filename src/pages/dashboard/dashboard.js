@@ -31,7 +31,7 @@ export const Dashboard = React.memo(() => {
         </div>
       </Content>
       <Footer className="position-fixed bottom-0 w-100">
-        Ant Design ©2023 Created by Ant UED
+        &#169; Presidio 2023
       </Footer>
     </Layout>
   );

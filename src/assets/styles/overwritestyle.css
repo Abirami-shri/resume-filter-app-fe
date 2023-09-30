@@ -12,7 +12,6 @@ th.ant-table-cell {
     background: #f3f2f1;
 }
 
-
 tr.ant-table-cell {
     border: 1px solid black;
 }
@@ -30,7 +29,6 @@ tr.ant-table-cell {
 .ant-table-cell {
     font-size: 14px;
 }
-
 
 /* .ant-tabs.ant-tabs-top.ant-tabs-card.css-dev-only-do-not-override-diro6f {
     display: grid !important;
@@ -50,6 +48,11 @@ footer.ant-layout-footer {
     background-color: #cce7f6 !important;
     box-sizing: border-box;
     box-shadow: 0rem 0.1rem 1rem #cce7f6;
+    z-index: 9999;
+}
+
+.position>tr.ant-table-cell {
+    cursor: pointer;
 }
 
 footer.ant-layout-footer {
@@ -93,10 +96,6 @@ img {
 
 .ant-table-wrapper td.ant-table-column-sort {
     background: none;
-}
-
-.ant-card-body {
-    box-shadow: 0rem 0.1rem 1rem #00000026;
 }
 
 .site-layout-content {
