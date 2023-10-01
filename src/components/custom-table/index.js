@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 
-export const CustomTable = ({ column, details, clickRow, selectedRow }) => {
+export const CustomTable = ({ column, details, clickRow, selectedRow, tableSize }) => {
   var [value, setValue] = useState("");
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export const CustomTable = ({ column, details, clickRow, selectedRow }) => {
           },
         }
       }
-      scroll={{ y: 300, x: 800 }}
+      scroll={{ y: 300, x: tableSize ? tableSize : 800 }}
       dataSource={details}
     ></Table>
   );
