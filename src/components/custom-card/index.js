@@ -102,7 +102,7 @@ export const CustomCard = React.memo(() => {
   return (
     <div>
       <Row gutter={16}>
-        <Col span={12}>
+        <Col span={8}>
           <Card size="small" title="Position with count of job offerings">
             <CustomTable
               column={positionColumn}
@@ -111,20 +111,20 @@ export const CustomCard = React.memo(() => {
               selectedRow={(value) => {
                 positionContext.setSelect(value);
               }}
+              tableSize={{x:300}}
             ></CustomTable>
           </Card>
         </Col>
-        <Col span={12}>
+        <Col span={8}>
           <Card size="small" title="Interview in progress">
             <CustomTable
               column={interviewColumn}
               details={interviewDetails}
+              // tableSize={{x:700}}
             ></CustomTable>
           </Card>
         </Col>
-      </Row>
-      <Row gutter={16}>
-        <Col span={24}>
+        <Col span={8}>
           <Card
             title="chart"
             extra={
@@ -154,6 +154,37 @@ export const CustomCard = React.memo(() => {
           </Card>
         </Col>
       </Row>
+      {/* <Row gutter={16}>
+        <Col span={24}>
+          <Card
+            title="chart"
+            extra={
+              <SelectForm
+                options={options}
+                setSelect={(value) => setSelectPosition(value)}
+                placeholder={"Select Position"}
+                position={true}
+                value={
+                  selectPosition.length > 0
+                    ? [
+                        {
+                          label: selectPosition,
+                          value: options.filter(
+                            (item) =>
+                              item.label.toLowerCase ===
+                              selectPosition.toLowerCase
+                          ).value,
+                        },
+                      ]
+                    : []
+                }
+              />
+            }
+          >
+            <ChartComponent value={selectPosition} />
+          </Card>
+        </Col>
+      </Row> */}
     </div>
   );
 });

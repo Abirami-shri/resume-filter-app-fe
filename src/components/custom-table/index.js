@@ -1,11 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
-import { MyContext } from "../input-form";
 
 export const CustomTable = ({ column, details, clickRow, selectedRow }) => {
   var [value, setValue] = useState("");
-
-  const positionContext = useContext(MyContext);
 
   useEffect(() => {
     if (clickRow && selectedRow) {

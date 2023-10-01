@@ -36,6 +36,31 @@ const ChartComponent = ({ value }) => {
       position: "Software Engineer",
     },
     {
+      vendorName: "Vendor F",
+      count: 40,
+      position: "Software Engineer",
+    },
+    {
+      vendorName: "Vendor G",
+      count: 50,
+      position: "Software Engineer",
+    },
+    {
+      vendorName: "Vendor H",
+      count: 20,
+      position: "Software Engineer",
+    },
+    {
+      vendorName: "Vendor I",
+      count: 10,
+      position: "Software Engineer",
+    },
+    {
+      vendorName: "Vendor J",
+      count: 35,
+      position: "Software Engineer",
+    },
+    {
       vendorName: "Vendor A",
       count: 35,
       position: "Data Engineer",

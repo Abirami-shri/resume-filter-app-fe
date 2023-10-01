@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import _isEmpty from "lodash/isEmpty";
 
-const FileUpload = ({ storeFile, show = false, file }) => {
+const FileUpload = ({ storeFile, show = false, file, disabled }) => {
   const [fileList, setFileList] = useState(file);
   useEffect(() => {
-    !_isEmpty(fileList) && storeFile(fileList);
+    storeFile(fileList);
   }, [fileList]);
   useEffect(() => {
     if (_isEmpty(show)) setFileList([]);
@@ -16,6 +16,7 @@ const FileUpload = ({ storeFile, show = false, file }) => {
   useEffect(() => {
     setFileList(file);
   }, [file]);
+  
   return (
     <Upload
       accept=".zip, .pdf, .doc"
@@ -23,6 +24,7 @@ const FileUpload = ({ storeFile, show = false, file }) => {
       beforeUpload={(file) => {
         setFileList([file]);
       }}
+      disabled={disabled}
       onRemove={() => setFileList([])}
       maxCount={1}
       customRequest={(options) => {

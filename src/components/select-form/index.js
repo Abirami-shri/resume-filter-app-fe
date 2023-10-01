@@ -2,7 +2,7 @@ import React from "react";
 import { Select } from "antd";
 
 export const SelectForm = React.memo(
-  ({ placeholder, options, setSelect, name, value, position, onSubmit }) => {
+  ({ placeholder, options, setSelect, name, value, position, disabled }) => {
     return (
       <Select
         value={value}
@@ -11,6 +11,7 @@ export const SelectForm = React.memo(
         name={name}
         placeholder={placeholder}
         optionFilterProp="children"
+        disabled={disabled}
         onChange={(value, option) => {
           setSelect(position ? option.label : option.value);
         }}

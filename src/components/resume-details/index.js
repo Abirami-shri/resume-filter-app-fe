@@ -1,8 +1,6 @@
 import React from "react";
-import { Card, Table } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload, faEye } from "@fortawesome/free-solid-svg-icons";
 import { CustomTable } from "../custom-table";
+import candidates from "../../data/candidates.js";
 
 export const ResumeDetails = () => {
   const column = [
@@ -19,17 +17,11 @@ export const ResumeDetails = () => {
       key: "email",
     },
     {
-      dataIndex: "phoneNumber",
-      title: <div className="font-weight-bold">Phone Number</div>,
+      dataIndex: "phone",
+      title: <div className="font-weight-bold">Phone #</div>,
       //   width: "150px",
-      key: "phoneNumber",
+      key: "phone",
     },
-    // {
-    //   dataIndex: "resumeId",
-    //   title: <div className="font-weight-bold">Resume ID</div>,
-    //   //   width: "150px",
-    //   key: "resumeId",
-    // },
     {
       dataIndex: "uploadedBy",
       title: <div className="font-weight-bold">Uploaded By</div>,
@@ -49,24 +41,17 @@ export const ResumeDetails = () => {
       key: "vendorName",
     },
     {
-      dataIndex: "techStackName",
+      dataIndex: "techStack",
       title: <div className="font-weight-bold">Stack Name</div>,
       //   width: "150px",
-      key: "techStackName",
+      key: "techStack",
     },
-    // {
-    //   dataIndex: "action",
-    //   title: <div className="font-weight-bold">Action</div>,
-    //   render: (_, record) => {
-    //     return (
-    //       <div className="d-flex justify-content-evenly">
-    //         <FontAwesomeIcon icon={faDownload} />
-    //         <FontAwesomeIcon icon={faEye} />
-    //       </div>
-    //     );
-    //   },
-    //   key: "action",
-    // },
+    {
+      dataIndex: "position",
+      title: <div className="font-weight-bold">Position</div>,
+      //   width: "150px",
+      key: "position",
+    },
   ];
 
   const details = [
@@ -85,7 +70,7 @@ export const ResumeDetails = () => {
 
   return (
     <div className="my-5">
-      <CustomTable column={column} details={details}></CustomTable>
+      <CustomTable column={column} details={candidates}></CustomTable>
     </div>
   );
 };

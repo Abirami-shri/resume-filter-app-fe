@@ -5,6 +5,7 @@ import FileUpload from "../file-upload";
 import { useSelector } from "react-redux";
 import { ResumeDetails } from "../resume-details";
 import { CustomCard } from "../custom-card";
+import { CustomTable } from "../custom-table";
 
 export const MyContext = createContext();
 
@@ -65,26 +66,49 @@ export const UploadFiles = React.memo(() => {
   const [api, contextHolder] = notification.useNotification();
 
   const openNotification = () => {
+    setShow(false);
     api.error({
-      message: `Error`,
-      description: "Hello",
+      message: `Found Duplicate Resumes`,
+      description: `${getDetails.resumeFile[0]?.name} is already existed with same stack and position and it's uploaded by Vendor 1`,
       placement: "topRight",
       className: "bg-danger",
       onClose: () => {
-        setDetails({ resumeFile: [], techStack: "", vendor: "" });
+        setDetails((prev) => ({
+          ...prev,
+          resumeFile: [],
+          techStack: "",
+          vendor: "",
+        }));
         setShow(true);
       },
     });
   };
 
-  const onSubmit = (details) => {
-    openNotification();
+  const onSubmit = () => {
+    if (
+      getDetails.techStack !== undefined &&
+      getDetails.techStack === "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    )
+      openNotification();
+    else {
+      setDetails((prev) => ({
+        ...prev,
+        resumeFile: [],
+        techStack: "",
+        vendor: "",
+      }));
+      setShow(true);
+    }
   };
 
   const selectedPositionRow = (value) => {
     setDetails((prev) => ({ ...prev, position: value }));
-    // formRef.current.scrollIntoView({ behavior: "smooth" });
   };
+
+  useEffect(() => {
+    if (getDetails.techStack.length > 0 && getDetails.vendor.length > 0)
+      onSubmit();
+  }, [getDetails]);
 
   return (
     <div className="mt-5">
@@ -99,8 +123,7 @@ export const UploadFiles = React.memo(() => {
           onFinish={onSubmit}
           initialValues={getDetails}
         >
-          <Row className="d-flex justify-content-between mt-5" gutter={16}>
-            {contextHolder}
+          <Row className="mt-5" gutter={16}>
             <Col span={6}>
               <SelectForm
                 setSelect={(value) => {
@@ -111,16 +134,21 @@ export const UploadFiles = React.memo(() => {
                 options={positionOptions}
                 position={true}
                 value={
-                  getDetails.position.length > 0 ? getDetails.position : []
+                  getDetails.position === undefined ||
+                  getDetails.position.length > 0
+                    ? getDetails.position
+                    : []
                 }
               ></SelectForm>
             </Col>
+
             <Col span={6}>
               <FileUpload
                 file={getDetails.resumeFile}
                 storeFile={(value) => {
                   setDetails((prev) => ({ ...prev, resumeFile: value }));
                 }}
+                disabled={getDetails.position.length > 0 ? false : true}
                 show={true}
               />
             </Col>
@@ -135,6 +163,7 @@ export const UploadFiles = React.memo(() => {
                 value={
                   getDetails.techStack.length > 0 ? getDetails.techStack : []
                 }
+                disabled={getDetails.resumeFile.length > 0 ? false : true}
               />
             </Col>
             <Col span={6}>
@@ -147,10 +176,17 @@ export const UploadFiles = React.memo(() => {
                 options={options.vendor}
                 value={getDetails.vendor.length > 0 ? getDetails.vendor : []}
                 onSubmit={true}
+                disabled={
+                  getDetails.techStack !== undefined &&
+                  getDetails.techStack.length > 0
+                    ? false
+                    : true
+                }
               />
             </Col>
           </Row>
         </Form>
+        {contextHolder}
 
         {show && <ResumeDetails />}
       </MyContext.Provider>
