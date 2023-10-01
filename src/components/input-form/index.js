@@ -108,6 +108,7 @@ export const UploadFiles = React.memo(() => {
   useEffect(() => {
     if (getDetails.techStack.length > 0 && getDetails.vendor.length > 0)
       onSubmit();
+    else if (getDetails.position.length > 0) setShow(true);
   }, [getDetails]);
 
   return (
@@ -188,7 +189,7 @@ export const UploadFiles = React.memo(() => {
         </Form>
         {contextHolder}
 
-        {show && <ResumeDetails />}
+        {show && <ResumeDetails filteredValue={getDetails.position} />}
       </MyContext.Provider>
     </div>
   );

@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CustomTable } from "../custom-table";
 import candidates from "../../data/candidates.js";
 
-export const ResumeDetails = () => {
+export const ResumeDetails = ({ filteredValue }) => {
+  const [details, setDetails] = useState([]);
+
+  useEffect(() => {
+    const filteredDetails = candidates.filter((item) =>
+      item.position.toLowerCase().includes(filteredValue.toLowerCase())
+    );
+    setDetails(filteredDetails);
+  }, [filteredValue]);
   const column = [
     {
       dataIndex: "name",
@@ -54,23 +62,12 @@ export const ResumeDetails = () => {
     },
   ];
 
-  const details = [
-    {
-      id: "1",
-      name: "Abirami Shri O B",
-      email: "abc@gmail.com",
-      phoneNumber: 9357267890,
-      resumeId: "12",
-      uploadedBy: "Hema",
-      uploadedDate: "12 Oct, 2022",
-      vendorName: "Abi",
-      techStackName: "React JS + Node JS",
-    },
-  ];
-
   return (
     <div className="my-5">
-      <CustomTable column={column} details={candidates}></CustomTable>
+      <CustomTable
+        column={column}
+        details={details.length > 0 ? details : candidates}
+      ></CustomTable>
     </div>
   );
 };
