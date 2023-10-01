@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Table } from "antd";
+import { MyContext } from "../input-form";
 
-export const CustomTable = ({ column, details, clickRow }) => {
-  console.log("custom table", column, details);
+export const CustomTable = ({ column, details, clickRow, selectedRow }) => {
+  var [value, setValue] = useState("");
+
+  const positionContext = useContext(MyContext);
+
+  useEffect(() => {
+    if (clickRow && selectedRow) {
+      selectedRow(value);
+    }
+  }, [value]);
+
   return (
     <Table
       bordered
@@ -13,7 +23,7 @@ export const CustomTable = ({ column, details, clickRow }) => {
       onRow={(row) =>
         clickRow && {
           onClick: () => {
-            console.log("row", row);
+            setValue(row.opening);
           },
         }
       }

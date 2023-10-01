@@ -21,9 +21,10 @@ export const Dashboard = React.memo(() => {
 
   return (
     <Layout>
-      <Header className="position-fixed w-100 d-flex align-items-center">
+      <Header className="position-fixed w-100 d-flex justify-content-between align-items-center">
         <img src={Logo} alt="logo" className={"my-3"} />
-        <div className="dashboard-text">DASHBOARD</div>
+        <div className="">DASHBOARD</div>
+        <div> sudha@gmail.com </div>
       </Header>
       <Content className="p-5">
         <div className="px-4">

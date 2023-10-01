@@ -8,7 +8,6 @@ const FileUpload = ({ storeFile, show = false, file }) => {
   const [fileList, setFileList] = useState(file);
   useEffect(() => {
     !_isEmpty(fileList) && storeFile(fileList);
-    console.log("file list", fileList);
   }, [fileList]);
   useEffect(() => {
     if (_isEmpty(show)) setFileList([]);
