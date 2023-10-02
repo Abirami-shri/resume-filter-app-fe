@@ -98,7 +98,6 @@ export const UploadFiles = React.memo(() => {
   const [api, contextHolder] = notification.useNotification();
 
   const openNotification = () => {
-    setShow(false);
     api.error({
       message: `Found Duplicate Resumes`,
       description: `${getDetails.resumeFile[0]?.name.replace(
