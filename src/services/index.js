@@ -2,8 +2,6 @@ import axios from "axios";
 import "./axios-interceptors";
 export const ROOT_URL = process.env.API_URL;
 
-console.log("root url", process);
-
 const API_CALL = (method, url, data, type, identifier, callback) => {
   let header =
     identifier === "file"
