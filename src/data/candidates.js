@@ -213,7 +213,7 @@ const candidates = [
     {
       id: 20,
       name: 'Tina Baker',
-      email: 'Hema',
+      email: 'diana.martinez@email.com',
       phone: '555-4567',
       uploadedBy: 'HR Coordinator',
       uploadedDate: '2023-10-20',

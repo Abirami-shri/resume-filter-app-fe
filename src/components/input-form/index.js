@@ -100,12 +100,10 @@ export const UploadFiles = React.memo(() => {
   const openNotification = () => {
     api.error({
       message: `Found Duplicate Resumes`,
-      description: `${getDetails.resumeFile[0]?.name.replace(
-        ".zip",
-        ".pdf"
-      )} is already existed with same stack and position and it's uploaded by Vendor 1`,
+      description: `Abirami_Resume.pdf is already existed with same stack, position and it's uploaded by Hemavarthini`,
       placement: "topRight",
       className: "bg-danger",
+      duration: 0,
       onClose: () => {
         setDetails((prev) => ({
           ...prev,
