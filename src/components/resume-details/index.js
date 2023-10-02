@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CustomTable } from "../custom-table";
 import candidates from "../../data/candidates.js";
 
-export const ResumeDetails = ({ filteredValue }) => {
+export const ResumeDetails = ({ filteredValue, loader }) => {
   const [details, setDetails] = useState([]);
 
   useEffect(() => {
@@ -67,6 +67,7 @@ export const ResumeDetails = ({ filteredValue }) => {
       <CustomTable
         column={column}
         details={details.length > 0 ? details : candidates}
+        loader={loader}
       ></CustomTable>
     </div>
   );

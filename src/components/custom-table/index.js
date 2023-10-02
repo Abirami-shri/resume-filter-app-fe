@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "antd";
+import { Spin, Table } from "antd";
 
-export const CustomTable = ({ column, details, clickRow, selectedRow, tableSize }) => {
+export const CustomTable = ({
+  column,
+  details,
+  clickRow,
+  selectedRow,
+  tableXSize,
+  tableYSize,
+  loader,
+}) => {
   var [value, setValue] = useState("");
 
   useEffect(() => {
@@ -24,8 +32,12 @@ export const CustomTable = ({ column, details, clickRow, selectedRow, tableSize 
           },
         }
       }
-      scroll={{ y: 300, x: tableSize ? tableSize : 800 }}
+      scroll={{
+        y: tableYSize ? tableYSize : 300,
+        x: tableXSize ? tableXSize : 800,
+      }}
       dataSource={details}
+      loading={loader && <Spin />}
     ></Table>
   );
 };

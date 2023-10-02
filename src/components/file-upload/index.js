@@ -16,10 +16,11 @@ const FileUpload = ({ storeFile, show = false, file, disabled }) => {
   useEffect(() => {
     setFileList(file);
   }, [file]);
-  
+
   return (
     <Upload
-      accept=".zip, .pdf, .doc"
+      accept=".zip"
+      // accept=".zip, .pdf, .doc"
       fileList={fileList}
       beforeUpload={(file) => {
         setFileList([file]);

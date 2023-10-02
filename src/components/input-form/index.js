@@ -2,22 +2,25 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { Col, Row, notification, Form } from "antd";
 import { SelectForm } from "../select-form";
 import FileUpload from "../file-upload";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ResumeDetails } from "../resume-details";
 import { CustomCard } from "../custom-card";
-import { CustomTable } from "../custom-table";
+import { postResume } from "../../services/post-resume-with-options/action";
 
 export const MyContext = createContext();
 
 export const UploadFiles = React.memo(() => {
+  const dispatch = useDispatch();
   const formRef = React.useRef(null);
-  const { stackOptionRes, vendorOptionRes } = useSelector(
-    ({ getStackOptionReducer, getVendorOptionReducer }) => ({
+  const { stackOptionRes, vendorOptionRes, getResponseForResume } = useSelector(
+    ({ getStackOptionReducer, getVendorOptionReducer, postResumeReducer }) => ({
       stackOptionRes: getStackOptionReducer.response.data,
       vendorOptionRes: getVendorOptionReducer.response.data,
+      getResponseForResume: postResumeReducer.response.data,
     })
   );
 
+  const [loader, setLoader] = useState(false);
   const [getDetails, setDetails] = useState({
     position: "",
     resumeFile: [],
@@ -50,6 +53,11 @@ export const UploadFiles = React.memo(() => {
     return item.map((value) => ({ value: value.id, label: value.name }));
   };
 
+  const dispatchinResumeDetails = (details) => {
+    setLoader(true);
+    dispatch(postResume(details));
+  };
+
   useEffect(() => {
     if (stackOptionRes !== undefined)
       setOptions((prev) => ({
@@ -63,13 +71,40 @@ export const UploadFiles = React.memo(() => {
       }));
     }
   }, [stackOptionRes, vendorOptionRes]);
+
+  useEffect(() => {
+    if (
+      getResponseForResume !== undefined &&
+      getDetails.position.length > 0 &&
+      getDetails.techStack.length > 0 &&
+      getDetails.vendor.length > 0
+    )
+      openNotification();
+    else if (
+      getDetails.position.length > 0 &&
+      getDetails.techStack.length > 0 &&
+      getDetails.vendor.length > 0
+    ) {
+      setDetails((prev) => ({
+        ...prev,
+        resumeFile: [],
+        techStack: "",
+        vendor: "",
+      }));
+      setLoader(false);
+      setShow(true);
+    }
+  }, [getResponseForResume]);
   const [api, contextHolder] = notification.useNotification();
 
   const openNotification = () => {
     setShow(false);
     api.error({
       message: `Found Duplicate Resumes`,
-      description: `${getDetails.resumeFile[0]?.name} is already existed with same stack and position and it's uploaded by Vendor 1`,
+      description: `${getDetails.resumeFile[0]?.name.replace(
+        ".zip",
+        ".pdf"
+      )} is already existed with same stack and position and it's uploaded by Vendor 1`,
       placement: "topRight",
       className: "bg-danger",
       onClose: () => {
@@ -79,26 +114,19 @@ export const UploadFiles = React.memo(() => {
           techStack: "",
           vendor: "",
         }));
+        setLoader(false);
         setShow(true);
       },
     });
   };
 
   const onSubmit = () => {
-    if (
-      getDetails.techStack !== undefined &&
-      getDetails.techStack === "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-    )
-      openNotification();
-    else {
-      setDetails((prev) => ({
-        ...prev,
-        resumeFile: [],
-        techStack: "",
-        vendor: "",
-      }));
-      setShow(true);
-    }
+    const detail = {
+      ZipFile: getDetails.resumeFile[0],
+      TechStackId: getDetails.techStack,
+      VendorId: getDetails.vendor,
+    };
+    dispatchinResumeDetails(detail);
   };
 
   const selectedPositionRow = (value) => {
@@ -189,7 +217,9 @@ export const UploadFiles = React.memo(() => {
         </Form>
         {contextHolder}
 
-        {show && <ResumeDetails filteredValue={getDetails.position} />}
+        {show && (
+          <ResumeDetails loader={loader} filteredValue={getDetails.position} />
+        )}
       </MyContext.Provider>
     </div>
   );

@@ -111,7 +111,8 @@ export const CustomCard = React.memo(() => {
               selectedRow={(value) => {
                 positionContext.setSelect(value);
               }}
-              tableSize={{x:300}}
+              tableXSize={300}
+              tableYSize={105}
             ></CustomTable>
           </Card>
         </Col>
@@ -120,13 +121,15 @@ export const CustomCard = React.memo(() => {
             <CustomTable
               column={interviewColumn}
               details={interviewDetails}
-              // tableSize={{x:700}}
+              tableXSize={0}
+              tableYSize={105}
             ></CustomTable>
           </Card>
         </Col>
         <Col span={8}>
           <Card
-            title="chart"
+            title={"Vendor resume distribution"}
+            size="small"
             extra={
               <SelectForm
                 options={options}
