@@ -121,8 +121,8 @@ export const CustomCard = React.memo(() => {
             <CustomTable
               column={interviewColumn}
               details={interviewDetails}
-              tableXSize={0}
-              tableYSize={105}
+              tableXSize={200}
+              tableYSize={85}
             ></CustomTable>
           </Card>
         </Col>
