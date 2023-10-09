@@ -13,7 +13,6 @@ export const getStackOptionReducer = (
         requesting: true,
       };
     case GET_STACK_OPTIONS.RES:
-      console.log("payload", payload);
       return {
         ...state,
         response: { data: payload.data, status: payload.status },

@@ -3,11 +3,13 @@ import { Layout } from "antd";
 import { UploadFiles } from "../../components/input-form";
 
 import Logo from "../../assets/images/presidio.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   getStackOptions,
   getVendorOptions,
 } from "../../services/get-options/action";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 const { Header, Content, Footer } = Layout;
 
@@ -21,9 +23,12 @@ export const Dashboard = React.memo(() => {
 
   return (
     <Layout>
-      <Header className="position-fixed w-100 d-flex align-items-center">
+      <Header className="position-fixed w-100 d-flex justify-content-between align-items-center">
         <img src={Logo} alt="logo" className={"my-3"} />
-        <div className="dashboard-text">DASHBOARD</div>
+        <div className="">DASHBOARD</div>
+        <div>
+          <FontAwesomeIcon icon={faUserCircle} /> sudha@gmail.com
+        </div>
       </Header>
       <Content className="p-5">
         <div className="px-4">

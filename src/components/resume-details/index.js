@@ -1,10 +1,16 @@
-import React from "react";
-import { Card, Table } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload, faEye } from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useState } from "react";
 import { CustomTable } from "../custom-table";
+import candidates from "../../data/candidates.js";
 
-export const ResumeDetails = () => {
+export const ResumeDetails = ({ filteredValue, loader }) => {
+  const [details, setDetails] = useState([]);
+
+  useEffect(() => {
+    const filteredDetails = candidates.filter((item) =>
+      item.position.toLowerCase().includes(filteredValue.toLowerCase())
+    );
+    setDetails(filteredDetails);
+  }, [filteredValue]);
   const column = [
     {
       dataIndex: "name",
@@ -19,17 +25,11 @@ export const ResumeDetails = () => {
       key: "email",
     },
     {
-      dataIndex: "phoneNumber",
-      title: <div className="font-weight-bold">Phone Number</div>,
+      dataIndex: "phone",
+      title: <div className="font-weight-bold">Phone #</div>,
       //   width: "150px",
-      key: "phoneNumber",
+      key: "phone",
     },
-    // {
-    //   dataIndex: "resumeId",
-    //   title: <div className="font-weight-bold">Resume ID</div>,
-    //   //   width: "150px",
-    //   key: "resumeId",
-    // },
     {
       dataIndex: "uploadedBy",
       title: <div className="font-weight-bold">Uploaded By</div>,
@@ -49,43 +49,26 @@ export const ResumeDetails = () => {
       key: "vendorName",
     },
     {
-      dataIndex: "techStackName",
+      dataIndex: "techStack",
       title: <div className="font-weight-bold">Stack Name</div>,
       //   width: "150px",
-      key: "techStackName",
+      key: "techStack",
     },
-    // {
-    //   dataIndex: "action",
-    //   title: <div className="font-weight-bold">Action</div>,
-    //   render: (_, record) => {
-    //     return (
-    //       <div className="d-flex justify-content-evenly">
-    //         <FontAwesomeIcon icon={faDownload} />
-    //         <FontAwesomeIcon icon={faEye} />
-    //       </div>
-    //     );
-    //   },
-    //   key: "action",
-    // },
-  ];
-
-  const details = [
     {
-      id: "1",
-      name: "Abirami Shri O B",
-      email: "abc@gmail.com",
-      phoneNumber: 9357267890,
-      resumeId: "12",
-      uploadedBy: "Hema",
-      uploadedDate: "12 Oct, 2022",
-      vendorName: "Abi",
-      techStackName: "React JS + Node JS",
+      dataIndex: "position",
+      title: <div className="font-weight-bold">Position</div>,
+      //   width: "150px",
+      key: "position",
     },
   ];
 
   return (
     <div className="my-5">
-      <CustomTable column={column} details={details}></CustomTable>
+      <CustomTable
+        column={column}
+        details={details.length > 0 ? details : candidates}
+        loader={loader}
+      ></CustomTable>
     </div>
   );
 };

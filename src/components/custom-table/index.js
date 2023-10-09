@@ -1,8 +1,23 @@
-import React from "react";
-import { Table } from "antd";
+import React, { useEffect, useState } from "react";
+import { Spin, Table } from "antd";
 
-export const CustomTable = ({ column, details, clickRow }) => {
-  console.log("custom table", column, details);
+export const CustomTable = ({
+  column,
+  details,
+  clickRow,
+  selectedRow,
+  tableXSize,
+  tableYSize,
+  loader,
+}) => {
+  var [value, setValue] = useState("");
+
+  useEffect(() => {
+    if (clickRow && selectedRow) {
+      selectedRow(value);
+    }
+  }, [value]);
+
   return (
     <Table
       bordered
@@ -13,12 +28,16 @@ export const CustomTable = ({ column, details, clickRow }) => {
       onRow={(row) =>
         clickRow && {
           onClick: () => {
-            console.log("row", row);
+            setValue(row.opening);
           },
         }
       }
-      scroll={{ y: 300, x: 800 }}
+      scroll={{
+        y: tableYSize ? tableYSize : 300,
+        x: tableXSize ? tableXSize : 800,
+      }}
       dataSource={details}
+      loading={loader && <Spin />}
     ></Table>
   );
 };

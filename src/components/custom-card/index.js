@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Card, Row, Col } from "antd";
-
+import { SelectForm } from "../select-form";
 import { CustomTable } from "../custom-table";
+import ChartComponent from "../custom-chart";
+import { MyContext } from "../input-form";
 
 export const CustomCard = React.memo(() => {
+  const [selectPosition, setSelectPosition] = useState("Software Engineer");
+
+  const positionContext = useContext(MyContext);
+  // Data for the bar chart
+  const options = [
+    { label: "Software Engineer", value: 1 },
+    { label: "Senior Engineer", value: 2 },
+    { label: "Data Engineer", value: 3 },
+    { label: "Lead Engineer", value: 4 },
+  ];
+
   const positionColumn = [
     {
       dataIndex: "opening",
@@ -89,24 +102,92 @@ export const CustomCard = React.memo(() => {
   return (
     <div>
       <Row gutter={16}>
-        <Col span={12}>
+        <Col span={8}>
           <Card size="small" title="Position with count of job offerings">
             <CustomTable
               column={positionColumn}
               details={positionDetails}
               clickRow={true}
+              selectedRow={(value) => {
+                positionContext.setSelect(value);
+              }}
+              tableXSize={300}
+              tableYSize={105}
             ></CustomTable>
           </Card>
         </Col>
-        <Col span={12}>
+        <Col span={8}>
           <Card size="small" title="Interview in progress">
             <CustomTable
               column={interviewColumn}
               details={interviewDetails}
+              tableXSize={200}
+              tableYSize={85}
             ></CustomTable>
           </Card>
         </Col>
+        <Col span={8}>
+          <Card
+            title={"Vendor resume distribution"}
+            size="small"
+            extra={
+              <SelectForm
+                options={options}
+                setSelect={(value) => setSelectPosition(value)}
+                placeholder={"Select Position"}
+                position={true}
+                value={
+                  selectPosition.length > 0
+                    ? [
+                        {
+                          label: selectPosition,
+                          value: options.filter(
+                            (item) =>
+                              item.label.toLowerCase ===
+                              selectPosition.toLowerCase
+                          ).value,
+                        },
+                      ]
+                    : []
+                }
+              />
+            }
+          >
+            <ChartComponent value={selectPosition} />
+          </Card>
+        </Col>
       </Row>
+      {/* <Row gutter={16}>
+        <Col span={24}>
+          <Card
+            title="chart"
+            extra={
+              <SelectForm
+                options={options}
+                setSelect={(value) => setSelectPosition(value)}
+                placeholder={"Select Position"}
+                position={true}
+                value={
+                  selectPosition.length > 0
+                    ? [
+                        {
+                          label: selectPosition,
+                          value: options.filter(
+                            (item) =>
+                              item.label.toLowerCase ===
+                              selectPosition.toLowerCase
+                          ).value,
+                        },
+                      ]
+                    : []
+                }
+              />
+            }
+          >
+            <ChartComponent value={selectPosition} />
+          </Card>
+        </Col>
+      </Row> */}
     </div>
   );
 });

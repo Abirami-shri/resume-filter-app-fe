@@ -2,14 +2,17 @@ import axios from "axios";
 import "./axios-interceptors";
 export const ROOT_URL = process.env.API_URL;
 
-console.log("root url", process);
-
 const API_CALL = (method, url, data, type, identifier, callback) => {
-  let header = {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-  };
+  let header =
+    identifier === "file"
+      ? {
+          "Content-Type": "multipart/form-data",
+        }
+      : {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+        };
   if (callback) {
     axios({
       method,

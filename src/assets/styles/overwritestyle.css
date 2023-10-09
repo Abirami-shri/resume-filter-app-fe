@@ -48,7 +48,7 @@ footer.ant-layout-footer {
     background-color: #cce7f6 !important;
     box-sizing: border-box;
     box-shadow: 0rem 0.1rem 1rem #cce7f6;
-    z-index: 9999;
+    z-index: 9;
 }
 
 .position>tr.ant-table-cell {
